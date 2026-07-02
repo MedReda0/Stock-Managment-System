@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+@theme {
+    --breakpoint-fold: 40rem;
+    --breakpoint-phone: 48rem;
+    --breakpoint-tablet: 62rem;
+    --breakpoint-laptop: 64rem;
+    --color-main-color: #ff5a1f;
+    --color-main-bg: #0a0a0a;
+    --color-2nd-bg: #1b1b1b;
+    --color-title-color: #FEFEFE;
+    --color-sub-title-color: #707070;
+    --color-text-color: #BABABA;
+}
+
+:root {
+    --main-color: #FD6F00;
+    --main-bg: #0a0a0a;
+    --sec-bg: #1b1b1b;
+    --title-color: #FEFEFE;
+    --sub-title-color: #707070;
+    --text-color: #BABABA;
+}
+
+@utility flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@utility flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+

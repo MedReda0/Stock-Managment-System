@@ -1,0 +1,86 @@
+@import url('https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css');
+@import url('https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css');
+@import url('https://cdn-uicons.flaticon.com/2.3.0/uicons-solid-rounded/css/uicons-solid-rounded.css');
+@import url('https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css');
+@import url('https://cdn-uicons.flaticon.com/2.3.0/uicons-solid-straight/css/uicons-solid-straight.css');
+@import url('https://cdn-uicons.flaticon.com/4.0.0/uicons-brands/css/uicons-brands.css');
+@import url('https://cdn-uicons.flaticon.com/4.0.0/uicons-bold-straight/css/uicons-bold-straight.css');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+*{
+    box-sizing: border-box;
+    scroll-behavior: smooth;  
+    font-family: "Manrope", sans-serif;
+}
+
+::-webkit-scrollbar{
+    width: 7px;
+    opacity: 0;
+}
+
+::-webkit-scrollbar {
+    background: transparent;
+}
+
+::-webkit-scrollbar-button{
+    height: 0;
+}
+
+::-webkit-scrollbar-thumb{
+    height: 30px;
+    transition: .5s;
+    background: rgba(253, 110, 0, 0.7);
+    border-radius: 50px;
+}
+
+body{
+    scroll-snap-type: y mandatory;
+}
+
+section {
+    scroll-snap-align: start;
+}
+
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+@media (min-width: 450px) {
+    .container {
+        max-width:450px
+    }
+}
+
+@media (min-width: 575px) {
+    .container {
+        max-width:575px
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width:768px
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width:992px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width:1400px
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width:1600px
+    }
+}
