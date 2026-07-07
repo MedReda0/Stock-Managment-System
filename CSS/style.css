@@ -1,27 +1,14 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 @theme {
     --breakpoint-fold: 40rem;
     --breakpoint-phone: 48rem;
     --breakpoint-tablet: 62rem;
     --breakpoint-laptop: 64rem;
-    --color-main-color: #ff5a1f;
-    --color-main-bg: #0a0a0a;
-    --color-2nd-bg: #1b1b1b;
-    --color-title-color: #FEFEFE;
-    --color-sub-title-color: #707070;
-    --color-text-color: #BABABA;
-}
-
-:root {
-    --main-color: #FD6F00;
-    --main-bg: #0a0a0a;
-    --sec-bg: #1b1b1b;
-    --title-color: #FEFEFE;
-    --sub-title-color: #707070;
-    --text-color: #BABABA;
+    --color-main-color: #FF7F50;
+    --color-main-bg: #FCEFEF;
+    --color-text-color: #655c5d;
 }
 
 @utility flex-center {
@@ -36,3 +23,163 @@
     align-items: center;
 }
 
+@utility flex-items {
+    display: flex;
+    align-items: center;
+}
+
+.overview .boxs::-webkit-scrollbar-thumb{
+    display: none;
+}
+
+.overview .box{
+    @apply p-5 h-[150px] rounded-lg text-black bg-white space-y-3
+}
+
+.overview .box .num{
+    @apply font-bold
+}
+
+.overview .box .icon{
+    @apply flex-items gap-4 z-0
+}
+
+.overview .box .icon h3{
+    @apply text-text-color/60 font-bold
+}
+
+.overview .box .icon i{
+    @apply text-main-color bg-main-color/20 rounded-full size-10 flex-center translate-y-[1.5px] text-[20px]
+}
+
+.overview .box .info{
+    @apply ml-1 space-y-1
+}
+
+.overview .box .info .num{
+    @apply text-xl font-black
+}
+
+.overview .box .info p{
+    @apply text-text-color/80 font-semibold text-sm
+}
+
+main .search input::placeholder{
+    @apply duration-125
+}
+
+main .search input:focus::placeholder{
+    @apply opacity-0
+}
+
+main .search i{
+    @apply text-gray-500 translate-y-[2px] cursor-pointer
+}
+
+main .header button:hover{
+    @apply text-main-color bg-white border-main-color
+}
+
+main button.filter-btn:hover{
+    @apply text-white bg-main-color
+}
+
+/* Filter Pop */
+.filter-pop {
+    @apply bg-white rounded-[14px] w-[90%] max-w-[450px];
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.filter-pop .cat-btn {
+    @apply border border-gray-200 text-text-color text-[13px] py-2.5 px-5 rounded-full duration-150;
+}
+
+.filter-pop .cat-btn:hover {
+    @apply border-main-color text-main-color bg-main-color/5;
+}
+
+.filter-pop .checkbox-box {
+    @apply size-[18px] border border-gray-300 rounded-[5px] duration-150 flex-center bg-white;
+}
+
+.filter-pop .checkbox-box i {
+    @apply text-white text-[10px] opacity-0 duration-150;
+}
+
+.filter-pop input:checked ~ .checkbox-box {
+    @apply bg-main-color border-main-color;
+}
+
+.filter-pop input:checked ~ .checkbox-box i {
+    @apply opacity-100;
+}
+
+.filter-pop .radio-box {
+    @apply size-[18px] border border-gray-300 rounded-full duration-150 bg-white;
+}
+
+.filter-pop input:checked ~ .radio-box {
+    @apply border-[5px] border-[#a43b17];
+}
+
+.filter-pop .input-box {
+    @apply border border-gray-200 rounded-lg py-2.5 px-3 flex-items gap-2 w-full duration-150;
+}
+
+.filter-pop .input-box:focus-within {
+    @apply border-main-color;
+}
+
+.filter-pop .clear-btn {
+    @apply text-[#a43b17] font-bold text-[14.5px] duration-150;
+}
+
+.filter-pop .clear-btn:hover {
+    @apply opacity-70;
+}
+
+.filter-pop .apply-btn {
+    @apply bg-main-color text-white font-bold text-[14.5px] py-3 px-8 rounded-lg duration-150 shadow-sm shadow-main-color/30;
+}
+
+.filter-pop .apply-btn:hover {
+    @apply opacity-90;
+}
+
+/* Add Product Pop */
+.add-product-pop {
+    @apply bg-white rounded-[14px] w-[90%] max-w-[450px];
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.add-product-pop .input-group label {
+    @apply block text-text-color/80 font-bold tracking-widest text-[11px] uppercase mb-2;
+}
+
+.add-product-pop input, .add-product-pop select {
+    @apply w-full border border-gray-200 rounded-lg py-2.5 px-3 outline-none text-[13px] font-medium text-black duration-150;
+}
+
+.add-product-pop input:focus, .add-product-pop select:focus {
+    @apply border-main-color;
+}
+
+.add-product-pop input::placeholder {
+    @apply text-gray-400 font-normal;
+}
+
+.add-product-pop .cancel-btn {
+    @apply border border-main-color text-main-color font-bold text-[12px] py-2.5 px-7 rounded-full duration-150 uppercase tracking-wide;
+}
+
+.add-product-pop .cancel-btn:hover {
+    @apply bg-main-color/5;
+}
+
+.add-product-pop .add-btn {
+    @apply bg-main-color text-white font-bold text-[12px] py-2.5 px-7 rounded-full duration-150 shadow-sm shadow-main-color/30 uppercase tracking-wide;
+}
+
+.add-product-pop .add-btn:hover {
+    @apply opacity-90;
+}

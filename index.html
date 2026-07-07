@@ -5,9 +5,230 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/output.css">
     <link rel="stylesheet" href="CSS/default.css">
-    <title>Title</title>
+    <link rel="shortcut icon" href="Assets/favicon.png" type="image/x-icon">
+    <title>Stock Management</title>
 </head>
-<body class="bg-main-bg text-text-color overflow-x-hidden!">
+<body class="overflow-x-hidden! bg-main-bg h-screen relative">
+    <div class="absolute top-0 left-0 size-full backdrop-blur-md backdrop-brightness-60 z-99 hidden"></div>
+    <header class="bg-main-color text-white font-black">
+        <div class="container flex-items gap-4 py-3">
+            <img src="Assets/logo.png" class="w-[50px]" alt="">
+            <h3>Stock Management System</h3>
+        </div>
+    </header>
+    <div class="container mt-5 space-y-2">
+        <div class="overview">
+            <h2 class="font-bold text-lg mb-2">Overview</h2>
+            <div class="date mb-7 text-text-color font-semibold text-[14px]">Saturday, Oct 24,2026</div>
+            <div class="boxs overflow-x-scroll grid grid-cols-[repeat(4,minmax(300px,1fr))] gap-5">
+                <div class="box low-stock bg-red-500/80! text-white!">
+                    <div class="icon">
+                        <i class="fi fi-sr-triangle-warning text-white! bg-white/20!"></i>
+                        <h3 class="text-white!">Low Stock Alert</h3>
+                    </div>
+                    <div class="info">
+                        <div class="num">1</div>
+                        <p class=" text-white!">Items need attention</p>
+                    </div>
+                </div>
+                <div class="box out-stock">
+                    <div class="icon">
+                        <i class="fi fi-sr-out-of-stock"></i>
+                        <h3>Out of Stock</h3>
+                    </div>
+                    <div class="info">
+                        <div class="num">1</div>
+                        <p>Requires reorder</p>
+                    </div>
+                </div>
+                <div class="box total-prods">
+                    <div class="icon">
+                        <i class="fi fi-sr-box"></i>
+                        <h3>Total Products</h3>
+                    </div>
+                    <div class="info">
+                        <div class="num">1</div>
+                        <p>Active Product</p>
+                    </div>
+                </div>
+                <div class="box total-prods-value">
+                    <div class="icon">
+                        <i class="fi fi-sr-coins"></i>
+                        <h3>Total Inventory Value</h3>
+                    </div>
+                    <div class="info">
+                        <div class="num">100k<span> Dh</span></div>
+                        <p>Estimated wholesale</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <main class="tablet:bg-white p-5 rounded-lg">
+            <div class="header flex-between max-tablet:mb-6 mb-8 tablet:pb-8 tablet:border-b border-black/10">
+                <div class="info">
+                    <h4 class="font-bold mb-1 max-tablet:text-[18px]">Inventory Management</h4>
+                    <p class="text-text-color/80 max-tablet:hidden">Manage your current stock levels and details</p>
+                </div>
+                <button class="font-bold max-tablet:text-sm text-[17px] flex-center bg-main-color text-white border border-transparent duration-150 py-2.5 px-8 rounded-[50px] uppercase">
+                    <i class="fi fi-br-plus translate-y-[2px] inline-block mr-2"></i>
+                    Add
+                    <span class="max-tablet:hidden ml-1">Product</span>
+                </button>
+            </div>
+            <div class="flex-items gap-3">
+                <div class="search bg-white border border-gray-500/30 rounded-[12px] w-[400px] max-tablet:py-3 py-2 px-3 space-x-3 flex-items">
+                    <label for="search">
+                        <i class="fi fi-br-search text-gray-500 translate-y-[2px]"></i>
+                    </label>
+                    <input type="text" id="search" name="search" placeholder="Search products, IDs..."
+                        class="outline-none caret-gray-500 w-full">
+                    <i class="fi fi-br-cross ml-auto text-[12px] hidden opacity-0 duration-125"></i>
+                </div>
+                <button class="filter-btn uppercase text-main-color font-semibold tracking-[1.5px] flex gap-1 max-tablet:py-3 py-2 px-4 border border-main-color/50 rounded-lg duration-150">
+                    <i class="fi fi-br-bars-filter"></i>
+                    Filter
+                </button>
+            </div>
+            <table></table>
+        </main>
+    </div>
+    <div class="filter-pop absolute top-1/2 left-1/2 -translate-1/2 z-100 hidden opacity-0">
+        <div class="header flex-between p-6 pb-4 border-b border-black/5">
+            <h3 class="font-bold text-[22px] text-black">Filter Inventory</h3>
+            <button class="close-btn text-gray-500 cursor-pointer duration-150 hover:text-black">
+                <i class="fi fi-br-cross text-sm"></i>
+            </button>
+        </div>
+        
+        <div class="body p-6 space-y-7">
+            <div class="filter-group">
+                <h4 class="text-text-color font-semibold mb-3 text-[15px]">Category</h4>
+                <div class="flex flex-wrap gap-2.5">
+                    <button class="cat-btn">Electronics</button>
+                    <button class="cat-btn">Furniture</button>
+                    <button class="cat-btn">Accessories</button>
+                    <button class="cat-btn">Lighting</button>
+                    <button class="cat-btn">Networking</button>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4 class="text-text-color font-semibold mb-3 text-[15px]">Sort By</h4>
+                <div class="space-y-3.5">
+                    <label class="flex-items gap-3 cursor-pointer w-fit">
+                        <input type="checkbox" class="hidden peer">
+                        <div class="checkbox-box">
+                            <i class="fi fi-br-check"></i>
+                        </div>
+                        <span class="text-sm text-text-color/80">Alphabetical</span>
+                    </label>
+                    <div class="flex-items gap-6">
+                        <label class="flex-items gap-3 cursor-pointer">
+                            <input type="radio" name="sort_order" class="hidden peer" checked>
+                            <div class="radio-box"></div>
+                            <span class="text-sm text-text-color/80">Ascending</span>
+                        </label>
+                        <label class="flex-items gap-3 cursor-pointer">
+                            <input type="radio" name="sort_order" class="hidden peer">
+                            <div class="radio-box"></div>
+                            <span class="text-sm text-text-color/80">Descending</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4 class="text-text-color font-semibold mb-3 text-[15px]">Stock Status</h4>
+                <div class="space-y-3.5">
+                    <label class="flex-items gap-3 cursor-pointer w-fit">
+                        <input type="checkbox" class="hidden peer">
+                        <div class="checkbox-box">
+                            <i class="fi fi-br-check"></i>
+                        </div>
+                        <span class="text-sm text-text-color/80">In Stock</span>
+                    </label>
+                    <label class="flex-items gap-3 cursor-pointer w-fit">
+                        <input type="checkbox" class="hidden peer">
+                        <div class="checkbox-box">
+                            <i class="fi fi-br-check"></i>
+                        </div>
+                        <span class="text-sm text-text-color/80">Low Stock</span>
+                    </label>
+                    <label class="flex-items gap-3 cursor-pointer w-fit">
+                        <input type="checkbox" class="hidden peer">
+                        <div class="checkbox-box">
+                            <i class="fi fi-br-check"></i>
+                        </div>
+                        <span class="text-sm text-text-color/80">Out of Stock</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h4 class="text-text-color font-semibold mb-3 text-[15px]">Price Range</h4>
+                <div class="flex gap-4">
+                    <div class="input-box">
+                        <span class="text-gray-500 font-bold text-[13px] translate-y-px font-mono">$</span>
+                        <input type="number" placeholder="Min" class="w-full bg-transparent outline-none text-sm text-text-color placeholder:text-gray-500 font-mono">
+                    </div>
+                    <div class="input-box">
+                        <span class="text-gray-500 font-bold text-[13px] translate-y-px font-mono">$</span>
+                        <input type="number" placeholder="Max" class="w-full bg-transparent outline-none text-sm text-text-color placeholder:text-gray-500 font-mono">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer bg-[#faf8f6] p-5 px-6 flex-items justify-between rounded-b-[14px]">
+            <button class="clear-btn w-1/2 text-center">Clear All</button>
+            <button class="apply-btn w-1/2 text-center">Apply Filters</button>
+        </div>
+    </div>
+    
+    <div class="add-product-pop absolute top-1/2 left-1/2 -translate-1/2 z-100 hidden opacity-0">
+        <div class="header flex-between p-6 pb-4 border-b border-black/5">
+            <h3 class="font-bold text-[16px] text-black">Add New Product</h3>
+            <button class="close-btn text-gray-500 cursor-pointer duration-150 hover:text-black">
+                <i class="fi fi-br-cross text-sm"></i>
+            </button>
+        </div>
+        
+        <div class="body p-6 space-y-6">
+            <div class="input-group">
+                <label>Product Name</label>
+                <input type="text" placeholder="e.g. Wireless Mouse">
+            </div>
+            
+            <div class="input-group">
+                <label>Category</label>
+                <div class="relative">
+                    <select class="appearance-none bg-white">
+                        <option>Electronics</option>
+                        <option>Furniture</option>
+                        <option>Accessories</option>
+                    </select>
+                    <i class="fi fi-br-angle-small-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm"></i>
+                </div>
+            </div>
+            
+            <div class="flex gap-4">
+                <div class="input-group flex-1">
+                    <label>Initial Stock</label>
+                    <input type="number" placeholder="0">
+                </div>
+                
+                <div class="input-group flex-1">
+                    <label>Price ($)</label>
+                    <input type="number" placeholder="0.00">
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer p-6 pt-0 flex-items justify-center gap-4">
+            <button class="cancel-btn">Cancel</button>
+            <button class="add-btn">Add Product</button>
+        </div>
+    </div>
     <script src="JS/script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
