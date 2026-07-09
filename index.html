@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="Assets/favicon.png" type="image/x-icon">
     <title>Stock Management</title>
 </head>
-<body class="overflow-hidden bg-main-bg relative flex flex-col">
+<body class="overflow-x-hidden bg-main-bg relative h-screen flex flex-col">
     <div class="absolute overlay top-0 left-0 size-full backdrop-blur-md backdrop-brightness-60 z-99 hidden opacity-0 duration-175"></div>
     <header class="bg-main-color text-white font-black">
         <div class="container flex-items gap-4 py-3">
@@ -16,8 +16,8 @@
             <h3>Stock Management System</h3>
         </div>
     </header>
-    <div class="container mt-5 flex-1 flex flex-col min-h-0 pb-5">
-        <div class="overview">
+    <div class="container mt-5 pb-5 flex-1 flex flex-col min-h-0">
+        <div class="overview shrink-0">
             <h2 class="font-bold text-lg mb-2">Overview</h2>
             <div class="date mb-7 text-text-color font-semibold text-[14px]">Saturday, Oct 24,2026</div>
             <div class="boxs overflow-x-scroll grid grid-cols-[repeat(4,minmax(300px,1fr))] gap-4">
@@ -63,13 +63,13 @@
                 </div>
             </div>
         </div>
-        <main class="phone:bg-white p-5 rounded-lg relative flex-1 flex flex-col min-h-0 mt-5">
+        <main class="tablet:bg-white p-5 pb-0 rounded-lg relative flex-1 flex flex-col min-h-[350px]">
             <div class="header flex-between max-tablet:mb-6 mb-8 tablet:pb-8 tablet:border-b border-black/10">
                 <div class="info">
                     <h4 class="font-bold mb-1 max-tablet:text-[18px]">Inventory Management</h4>
                     <p class="text-text-color/80 max-phone:hidden">Manage your current stock levels and details</p>
                 </div>
-                <button data-pop-up="add-product-pop" class="btn add-product-btn font-bold z-50 max-phone:absolute max-phone:right-0 max-phone:bottom-0 max-tablet:text-sm text-[17px] flex-center duration-150 phone:py-2.5 phone:px-8 max-phone:size-[60px] rounded-[50px] max-phone:rounded-full uppercase">
+                <button data-pop-up="add-product-pop" class="btn add-product-btn font-bold max-tablet:text-sm text-[17px] flex-center duration-150 phone:py-2.5 phone:px-8 max-phone:size-[45px] rounded-[50px] max-phone:rounded-full uppercase">
                     <i class="fi fi-br-plus translate-y-[2px] inline-block"></i>
                     <span class="max-phone:hidden ml-2">Add Product</span>
                 </button>
@@ -209,12 +209,12 @@
         <div class="body space-y-6">
             <div class="input-group">
                 <label>Product Name</label>
-                <input type="text" placeholder="e.g. Wireless Mouse">
+                <input type="text" placeholder="e.g. Wireless Mouse" id="name">
             </div>
             <div class="input-group">
                 <label>Category</label>
                 <div class="relative">
-                    <select class="appearance-none bg-white cursor-pointer">
+                    <select class="appearance-none bg-white cursor-pointer" id="category">
                         <option>Electronics</option>
                         <option>Furniture</option>
                         <option>Accessories</option>
@@ -225,17 +225,56 @@
             <div class="flex gap-4">
                 <div class="input-group flex-1">
                     <label>Initial Stock</label>
-                    <input type="number" placeholder="0">
+                    <input type="number" placeholder="0" id="stock">
                 </div>
                 <div class="input-group flex-1">
                     <label>Price ($)</label>
-                    <input type="number" placeholder="0.00">
+                    <input type="number" placeholder="0.00" id="price">
                 </div>
             </div>
         </div>
         <div class="footer p-6 pt-0">
-            <button class="cancel-btn close-btn btn-alt">Cancel</button>
+            <button class="close-btn btn-alt">Cancel</button>
             <button class="add-btn close-btn btn shadow-sm shadow-main-color/30">Add Product</button>
+        </div>
+    </div>
+    <div class="edit-product-pop pop-up hidden opacity-0">
+        <div class="header">
+            <h3 class="text-[16px]">Edit Product</h3>
+            <div class="close-btn">
+                <i class="fi fi-br-cross text-sm"></i>
+            </div>
+        </div>
+        <div class="body space-y-6">
+            <div class="input-group">
+                <label>Product Name</label>
+                <input type="text" placeholder="e.g. Wireless Mouse" id="name">
+            </div>
+            <div class="input-group">
+                <label>Category</label>
+                <div class="relative">
+                    <select class="appearance-none bg-white cursor-pointer" id="category">
+                        <option>Electronics</option>
+                        <option>Furniture</option>
+                        <option>Accessories</option>
+                    </select>
+                    <i class="fi fi-br-angle-small-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm"></i>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <div class="input-group flex-1">
+                    <label>Initial Stock</label>
+                    <input type="number" placeholder="0" id="stock">
+                </div>
+                <div class="input-group flex-1">
+                    <label>Price ($)</label>
+                    <input type="number" placeholder="0.00" id="price">
+                </div>
+            </div>
+        </div>
+        <div class="footer p-6 pt-0">
+            <button class="close-btn btn-alt">Cancel</button>
+            <button class="edit-btn close-btn btn shadow-sm shadow-main-color/30">Edit Product</button>
         </div>
     </div>
     <script src="JS/script.js"></script>

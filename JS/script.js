@@ -4,47 +4,52 @@ const filter_btn = document.querySelector(".filter-btn")
 const filter_pop = document.querySelector(".filter-pop")
 const add_product_btn = document.querySelector(".add-product-btn")
 const add_product_pop = document.querySelector(".add-product-pop")
+const add_done_btn = document.querySelector(".add-btn")
+const edit_product_pop = document.querySelector(".edit-product-pop")
+const edit_done_btn = document.querySelector(".edit-btn")
 const pop_up = document.querySelectorAll(".pop-up")
 const pop_close_btn = document.querySelectorAll(".close-btn")
 const overlay = document.querySelector(".overlay")
+let current_tr
 
-function clear_search(){
+const tbody = document.querySelector("#inventory tbody");
+function clear_search() {
     search_clear_btn.classList.add("opacity-0")
     setTimeout(() => {
         search_clear_btn.classList.add("hidden")
     }, 100);
 }
 
-search_input.addEventListener("input",()=>{
+search_input.addEventListener("input", () => {
     search_clear_btn.classList.remove("hidden")
     setTimeout(() => {
         search_clear_btn.classList.remove("opacity-0")
     }, 100);
 })
 
-search_input.addEventListener("input",(e)=>{
-    if(e.target.value==""){
+search_input.addEventListener("input", (e) => {
+    if (e.target.value == "") {
         clear_search()
     }
 })
 
-search_clear_btn.addEventListener("click",()=>{
-    if(document.activeElement!==search_input){
+search_clear_btn.addEventListener("click", () => {
+    if (document.activeElement !== search_input) {
         search_input.focus()
     }
-    search_input.value=""
+    search_input.value = ""
     clear_search()
 })
 
-function pop_up_toggle(ele){
-    if(ele.classList.contains("hidden")){
+function pop_up_toggle(ele) {
+    if (ele.classList.contains("hidden")) {
         ele.classList.remove("hidden")
         overlay.classList.remove("hidden")
         setTimeout(() => {
             ele.classList.remove("opacity-0")
             overlay.classList.remove("opacity-0")
         }, 100);
-    }else{
+    } else {
         ele.classList.add("opacity-0")
         overlay.classList.add("opacity-0")
         setTimeout(() => {
@@ -52,21 +57,21 @@ function pop_up_toggle(ele){
             overlay.classList.add("hidden")
         }, 100);
     }
-    
+
 }
 
-[add_product_btn,filter_btn].forEach((btn)=>{
-    btn.addEventListener("click",()=>{pop_up_toggle(document.querySelector(`.${btn.dataset.popUp}`))})
+[add_product_btn, filter_btn].forEach((btn) => {
+    btn.addEventListener("click", () => { pop_up_toggle(document.querySelector(`.${btn.dataset.popUp}`)) })
 })
 
-pop_close_btn.forEach((btn=>{
-    btn.addEventListener("click",()=>{
+pop_close_btn.forEach((btn => {
+    btn.addEventListener("click", () => {
         pop_up_toggle(btn.parentElement.parentElement)
     })
 }))
 
 overlay.addEventListener("click", () => {
-    [...pop_up].map((a_pop) => { a_pop.classList.contains("hidden") == false ? pop_up_toggle(a_pop) : ""})
+    [...pop_up].map((a_pop) => { a_pop.classList.contains("hidden") == false ? pop_up_toggle(a_pop) : "" })
 })
 
 const inventory = [
@@ -78,8 +83,6 @@ const inventory = [
     { id: 4, name: "USB-C Cable (2m)", category: "Accessories", stock: 450, price: 14.99 },
     { id: 4, name: "USB-C Cable (2m)", category: "Accessories", stock: 450, price: 14.99 }
 ];
-
-const tbody = document.querySelector("#inventory tbody");
 
 function getStockStatus(stock) {
     if (stock > 20) {
@@ -110,8 +113,8 @@ function renderTable() {
             <td>$${item.price.toFixed(2)}</td>
             <td>
                 <div class="desktop-actions">
-                    <i class="fi fi-sr-edit"></i>
-                    <i class="fi fi-sr-trash"></i>
+                    <i class="fi fi-sr-edit edit-product-btn"></i>
+                    <i class="fi fi-sr-trash delete-product-btn"></i>
                 </div>
             </td>
         `;
@@ -120,3 +123,51 @@ function renderTable() {
 }
 
 renderTable();
+
+add_done_btn.addEventListener("click", () => {
+    const newId = inventory.length > 0 ? Math.max(...inventory.map(item => item.id)) + 1 : 1;
+    
+    const newProduct = {
+        id: newId,
+        name: add_product_pop.querySelector("#name").value,
+        category: add_product_pop.querySelector("#category").value,
+        stock: parseInt(add_product_pop.querySelector("#stock").value) || 0,
+        price: parseFloat(add_product_pop.querySelector("#price").value) || 0,
+    };
+    inventory.push(newProduct);
+    renderTable()
+})
+
+
+tbody.addEventListener("click", (e) => {
+    if (e.target.closest(".edit-product-btn")) {
+        let tr = e.target.closest("tr")
+        let id = parseInt(tr.querySelector("td:nth-child(1)").textContent.replace('ID:', ''))
+        
+        current_tr = inventory.findIndex(item => item.id === id)
+        
+        edit_product_pop.querySelector("#name").value = inventory[current_tr].name
+        edit_product_pop.querySelector("#category").value = inventory[current_tr].category
+        edit_product_pop.querySelector("#stock").value = inventory[current_tr].stock
+        edit_product_pop.querySelector("#price").value = inventory[current_tr].price
+        pop_up_toggle(edit_product_pop)
+    }
+    if (e.target.closest(".delete-product-btn")) {
+        let tr = e.target.closest("tr")
+        let id = parseInt(tr.querySelector("td:nth-child(1)").textContent.replace('ID:', ''))
+        
+        let index = inventory.findIndex(item => item.id === id)
+        if (index > -1) {
+            inventory.splice(index, 1)
+        }
+        renderTable()
+    }
+})
+
+edit_done_btn.addEventListener("click", () => {
+    inventory[current_tr].name = edit_product_pop.querySelector("#name").value
+    inventory[current_tr].category = edit_product_pop.querySelector("#category").value
+    inventory[current_tr].stock = parseInt(edit_product_pop.querySelector("#stock").value)
+    inventory[current_tr].price = parseFloat(edit_product_pop.querySelector("#price").value)
+    renderTable()
+})
