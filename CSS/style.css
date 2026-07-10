@@ -74,7 +74,8 @@
     @apply ml-1 space-y-1
 }
 
-.overview .box .info .num{
+.overview .box .info .num,
+.overview .box .info span{
     @apply text-xl font-black
 }
 
@@ -200,8 +201,8 @@
 #inventory th:nth-child(5), #inventory td:nth-child(5) { @apply tablet:w-[13%]; }
 #inventory th:nth-child(6), #inventory td:nth-child(6) { @apply tablet:w-[10%]; }
 
-#inventory tbody::-webkit-scrollbar-thumb{
-    display: none;
+#inventory tbody::-webkit-scrollbar{
+    width: 5px;
 }
 
 #inventory tbody tr {

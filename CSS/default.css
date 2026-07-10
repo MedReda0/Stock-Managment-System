@@ -17,14 +17,11 @@
 ::-webkit-scrollbar{
     width: 7px;
     opacity: 0;
-}
-
-::-webkit-scrollbar {
     background: transparent;
 }
 
 ::-webkit-scrollbar-button{
-    height: 0;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-thumb{

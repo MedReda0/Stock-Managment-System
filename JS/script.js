@@ -10,7 +10,13 @@ const edit_done_btn = document.querySelector(".edit-btn")
 const pop_up = document.querySelectorAll(".pop-up")
 const pop_close_btn = document.querySelectorAll(".close-btn")
 const overlay = document.querySelector(".overlay")
+const date = document.querySelector(".date")
 let current_tr
+const low_stock_card = document.querySelector(".low-stock")
+const low_stock_card_txt_white = document.querySelectorAll(".txt-white")
+const out_stock_card = document.querySelector(".out-stock .info .num")
+const total_prods_card = document.querySelector(".total-prods .info .num")
+const total_value_card = document.querySelector(".total-value .info .num")
 
 const tbody = document.querySelector("#inventory tbody");
 function clear_search() {
@@ -74,6 +80,17 @@ overlay.addEventListener("click", () => {
     [...pop_up].map((a_pop) => { a_pop.classList.contains("hidden") == false ? pop_up_toggle(a_pop) : "" })
 })
 
+const today_date = new Date();
+
+const form = new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+});
+
+date.textContent = form.format(today_date)
+
 const inventory = [
     { id: 1, name: "Wireless Mouse", category: "Electronics", stock: 145, price: 24.99 },
     { id: 2, name: "Mechanical Keyboard", category: "Electronics", stock: 12, price: 129.50 },
@@ -96,6 +113,30 @@ function getStockStatus(stock) {
 
 function renderTable() {
     if (!tbody) return;
+    const low_stock = inventory.filter(item => item.stock > 0 && item.stock <= 20).length;
+    const out_stock = inventory.filter(item => item.stock === 0).length;
+    const total_prods = inventory.reduce((sum, item) => sum + item.stock, 0);
+    const total_value = inventory.reduce((sum, item) => sum + (item.price * item.stock), 0);
+    
+    low_stock_card.querySelector(".info .num").textContent = low_stock;
+    out_stock_card.textContent = out_stock;
+    total_prods_card.textContent = total_prods;
+    total_value_card.textContent = `${total_value.toFixed(2)} DH`;
+    
+    if(low_stock_card.querySelector(".info .num").textContent>0){
+        low_stock_card.classList.add("bg-red-500/80!")
+        low_stock_card.querySelector("i").classList.add("bg-white/20!")
+        low_stock_card_txt_white.forEach((ele)=>{
+            ele.classList.add("text-white!")
+        })
+    }else{
+        low_stock_card.classList.remove("bg-red-500/80!")
+        low_stock_card.querySelector("i").classList.remove("bg-white/20!")
+        low_stock_card_txt_white.forEach((ele) => {
+            ele.classList.remove("text-white!")
+        })
+    }
+
     tbody.innerHTML = "";
     inventory.forEach(item => {
         const status = getStockStatus(item.stock);
@@ -110,7 +151,7 @@ function renderTable() {
                 <span class="status-badge ${status.class}">${status.label}</span>
                 <span class="text-black font-bold text-[13px] ml-2">${item.stock} units</span>
             </td>
-            <td>$${item.price.toFixed(2)}</td>
+            <td>${item.price.toFixed(2)} DH</td>
             <td>
                 <div class="desktop-actions">
                     <i class="fi fi-sr-edit edit-product-btn"></i>
