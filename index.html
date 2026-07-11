@@ -116,7 +116,8 @@
             <div class="filter-group input-group">
                 <h4 class="text-text-color font-semibold mb-3 text-[15px]">Category</h4>
                 <div class="relative">
-                    <select class="appearance-none bg-white cursor-pointer">
+                    <select class="appearance-none bg-white cursor-pointer" id="filter-category">
+                        <option value="">All Categories</option>
                         <option>Electronics</option>
                         <option>Furniture</option>
                         <option>Accessories</option>
@@ -131,7 +132,7 @@
                 <h4 class="text-text-color font-semibold mb-3 text-[15px]">Sort By</h4>
                 <div class="space-y-3.5">
                     <label class="flex-items gap-3 cursor-pointer w-fit">
-                        <input type="checkbox" class="hidden">
+                        <input type="checkbox" class="hidden" id="filter-alphabetical">
                         <div class="checkbox-box">
                             <i class="fi fi-br-check"></i>
                         </div>
@@ -139,12 +140,12 @@
                     </label>
                     <div class="flex-items gap-6">
                         <label class="flex-items gap-3 cursor-pointer">
-                            <input type="radio" name="sort_order" class="hidden peer" checked>
+                            <input type="radio" name="sort_order" class="hidden peer" id="filter-ascending" checked>
                             <div class="radio-box"></div>
                             <span class="text-sm text-text-color/80">Ascending</span>
                         </label>
                         <label class="flex-items gap-3 cursor-pointer">
-                            <input type="radio" name="sort_order" class="hidden peer">
+                            <input type="radio" name="sort_order" class="hidden peer" id="filter-descending">
                             <div class="radio-box"></div>
                             <span class="text-sm text-text-color/80">Descending</span>
                         </label>
@@ -156,21 +157,21 @@
                 <h4 class="text-text-color font-semibold mb-3 text-[15px]">Stock Status</h4>
                 <div class="space-y-3.5">
                     <label class="flex-items gap-3 cursor-pointer w-fit">
-                        <input type="checkbox" class="hidden peer">
+                        <input type="checkbox" class="hidden peer" id="filter-in-stock">
                         <div class="checkbox-box">
                             <i class="fi fi-br-check"></i>
                         </div>
                         <span class="text-sm text-text-color/80">In Stock</span>
                     </label>
                     <label class="flex-items gap-3 cursor-pointer w-fit">
-                        <input type="checkbox" class="hidden peer">
+                        <input type="checkbox" class="hidden peer" id="filter-low-stock">
                         <div class="checkbox-box">
                             <i class="fi fi-br-check"></i>
                         </div>
                         <span class="text-sm text-text-color/80">Low Stock</span>
                     </label>
                     <label class="flex-items gap-3 cursor-pointer w-fit">
-                        <input type="checkbox" class="hidden peer">
+                        <input type="checkbox" class="hidden peer" id="filter-out-stock">
                         <div class="checkbox-box">
                             <i class="fi fi-br-check"></i>
                         </div>
@@ -184,11 +185,11 @@
                 <div class="flex gap-4">
                     <div class="input-box">
                         <span class="text-gray-500 font-bold text-[13px] translate-y-px font-mono">$</span>
-                        <input type="number" placeholder="Min" class="w-full bg-transparent outline-none text-sm text-text-color placeholder:text-gray-500 font-mono">
+                        <input type="number" placeholder="Min" id="filter-price-min" class="w-full bg-transparent outline-none text-sm text-text-color placeholder:text-gray-500 font-mono">
                     </div>
                     <div class="input-box">
                         <span class="text-gray-500 font-bold text-[13px] translate-y-px font-mono">$</span>
-                        <input type="number" placeholder="Max" class="w-full bg-transparent outline-none text-sm text-text-color placeholder:text-gray-500 font-mono">
+                        <input type="number" placeholder="Max" id="filter-price-max" class="w-full bg-transparent outline-none text-sm text-text-color placeholder:text-gray-500 font-mono">
                     </div>
                 </div>
             </div>
