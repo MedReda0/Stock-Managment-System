@@ -1,3 +1,5 @@
+The System won't work without a database
+
 The Database Blueprint :
 
 CREATE DATABASE stock_db;
