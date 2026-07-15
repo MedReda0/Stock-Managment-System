@@ -205,6 +205,12 @@
     width: 5px;
 }
 
+@media (max-width:768px){
+    #inventory tbody::-webkit-scrollbar{
+    width: 0px;
+    }
+}
+
 #inventory tbody tr {
     @apply table w-full table-fixed border-b border-black/5 duration-150 max-tablet:block max-tablet:bg-white max-tablet:border max-tablet:border-gray-200 max-tablet:rounded-xl max-tablet:p-5 max-tablet:shadow-sm max-tablet:relative;
 }

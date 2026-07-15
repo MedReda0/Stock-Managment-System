@@ -226,7 +226,7 @@ async function renderTable() {
             <td>
                 <span class="max-tablet:inline hidden text-text-color/80 mr-1">ID:</span>${item.id}
             </td>
-            <td>${item.name}</td>
+            <td class="name">${item.name}</td>
             <td>${item.category}</td>
             <td>
                 <span class="status-badge ${status.class}">${status.label}</span>
@@ -283,7 +283,10 @@ add_done_btn.addEventListener("click", async () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newProduct),
     });
-
+    add_product_pop.querySelector("#name").value = ""
+    add_product_pop.querySelector("#category").value = ""
+    add_product_pop.querySelector("#stock").value = ""
+    add_product_pop.querySelector("#price").value = ""
     resetFilterUI()
     renderTable();
 })
@@ -331,4 +334,17 @@ edit_done_btn.addEventListener("click", async () => {
     });
 
     renderTable();
+})
+
+search_input.addEventListener("input",(e)=>{
+    let tr = document.querySelectorAll("tr")
+    tr.forEach((tr) => { tr.classList.remove("hidden!") })
+    tr.forEach((tr) => {
+        let rowName = tr.querySelector("td.name")
+        if(rowName){
+            if (!rowName.textContent.toLowerCase().includes(e.target.value.toLowerCase())){
+                tr.classList.add("hidden!")
+            }
+        }
+    })
 })
