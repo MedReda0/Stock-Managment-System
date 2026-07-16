@@ -67,7 +67,14 @@ function pop_up_toggle(ele) {
 }
 
 [add_product_btn, filter_btn].forEach((btn) => {
-    btn.addEventListener("click", () => { pop_up_toggle(document.querySelector(`.${btn.dataset.popUp}`)) })
+    btn.addEventListener("click", () => { 
+        let target = document.querySelector(`.${btn.dataset.popUp}`)
+        pop_up_toggle(target)
+        if (target == add_product_pop){
+            target.querySelectorAll("input").forEach((ele)=>ele.value="")
+            target.querySelector("#category").selectedIndex = 0
+        }
+    })
 })
 
 pop_close_btn.forEach((btn => {
@@ -283,10 +290,6 @@ add_done_btn.addEventListener("click", async () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newProduct),
     });
-    add_product_pop.querySelector("#name").value = ""
-    add_product_pop.querySelector("#category").value = ""
-    add_product_pop.querySelector("#stock").value = ""
-    add_product_pop.querySelector("#price").value = ""
     resetFilterUI()
     renderTable();
 })
